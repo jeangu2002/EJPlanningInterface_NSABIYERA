@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="../../header.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+        <title><ui:define name="title">Toutes les activités</ui:define></title>
+        
+    <ui:define name="body">
+       
+       <p:outputLabel value="Liste des moniteurs"></p:outputLabel>
+       <p:dataTable value="#{controllerUtilisateurManagedBean.all}" var="user" stickyHeader="true">
+           <f:facet name="header">
+               Tous les moniteurs
+            </f:facet>
+            <p:column>
+                    <f:facet name="header">
+                            <h:outputText value="nom"></h:outputText>
+                    </f:facet>
+                <h:outputText value="#{user.nom}"></h:outputText>
+            </p:column>
+            <p:column>
+                    <f:facet name="header">
+                            <h:outputText value="prénom"></h:outputText>
+                    </f:facet>
+                <h:outputText value="#{user.prenom}"></h:outputText>
+            </p:column>
+           <p:column>
+                    <f:facet name="header">
+                            <h:outputText value="pseudo"></h:outputText>
+                    </f:facet>
+               <h:outputText value="#{user.pseudo}"></h:outputText>
+            </p:column>
+           <p:column>
+                    <f:facet name="header">
+                            <h:outputText value="type"></h:outputText>
+                    </f:facet>
+               <h:outputText value="#{user.type}"></h:outputText>
+            </p:column>
+        </p:dataTable>
+        
+    </ui:define>
+
+
+</ui:composition>

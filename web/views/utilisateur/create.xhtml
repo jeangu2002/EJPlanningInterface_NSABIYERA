@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="../../header.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <title><ui:define name="title">Inscription</ui:define></title>
+
+    <ui:define name="body">
+        <h:form>
+            <p:growl id="growl" showDetail="false" sticky="false" />
+            <p:fieldset legend="Inscription" widgetVar="regWidget" style="min-width: 570px;">
+                <h:panelGrid columns="1" width="550" border="0">
+                    <h:outputLabel value="Inscription"></h:outputLabel>
+
+                    <h:outputLabel for="Nom" value="nom" />
+                    <p:inputText value="#{controllerUtilisateurManagedBean.utilisateurBean.nom}" >
+                    </p:inputText>
+          
+                    <h:outputLabel for="Prenom" value="prénom" />
+                    <p:inputText value="#{controllerUtilisateurManagedBean.utilisateurBean.prenom}" >
+                    </p:inputText>
+
+                    <h:outputLabel for="pseudo" value="pseudo" />
+                    <p:inputText value="#{controllerUtilisateurManagedBean.utilisateurBean.pseudo}" >
+                    </p:inputText>
+
+                    <h:outputLabel for="motDePasse" value="mot de passe" />
+                    <p:password value="#{controllerUtilisateurManagedBean.utilisateurBean.motDePasse}" >
+                    </p:password>
+                    
+                    <h:selectOneMenu value="#{controllerUtilisateurManagedBean.utilisateurBean.type}">
+                         <f:selectItem itemValue="moniteur" itemLabel="Moniteur" />
+   			<f:selectItem itemValue="responsable" itemLabel="Responsable" />
+                    </h:selectOneMenu>
+
+                    <p:commandButton action="#{controllerUtilisateurManagedBean.addUtilisateur(controllerUtilisateurManagedBean.utilisateurBean)}"
+                                     value="Enregistrer" 
+                                     ajax="false" 
+                                     update="growl"/>
+                </h:panelGrid>
+            </p:fieldset>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

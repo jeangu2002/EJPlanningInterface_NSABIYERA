@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="../../header.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <title><ui:define name="title">Toutes les compétitions</ui:define></title>
+
+    <ui:define name="body">
+        <f:view encoding="UTF-8" locale="fr">
+        <h:form acceptcharset="UTF-8" lang="fr">
+            <p:dataTable value="#{controllerCompetitionManagedBean.all}" var="competition" 
+                         emptyMessage="Aucune compétiton trouvé" filteredValue="#{controllerCompetitionManagedBean.filtres}"
+                         stickyHeader="true" rowKey="#{competition.id}" id="competitions" 
+                         selection="#{controllerCompetitionManagedBean.selectedCompetition}" selectionMode="single">
+                <f:facet name="header">
+                    Toutes les compétitions
+                </f:facet>
+                <p:column headerText="compétition" filterBy="#{competition.nom}" filterMatchMode="contains">
+                    <h:outputText value="#{competition.nom}"></h:outputText>
+                </p:column>
+                <p:column headerText="activite" filterBy="#{competition.sport.nom}" filterMatchMode="contains">
+                    <h:outputText value="#{competition.sport.nom}"></h:outputText>
+                </p:column>
+                <p:column headerText="date">
+                    <h:outputText value="#{competition.dateCompetition}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="adresse" filterBy="#{competition.rue}" filterMatchMode="contains">
+                    <h:outputText value="#{competition.rue} #{competition.numero}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="localité" filterBy="#{competition.localite}" filterMatchMode="contains">
+                    <h:outputText value="#{competition.localite}"></h:outputText>
+                </p:column>
+
+            </p:dataTable>
+            
+             <p:contextMenu for="competitions">
+                <p:menuitem value="Voir les détails" update="competitionDetail" icon="ui-icon-info" oncomplete="PF('competitionDialog').show()"/>
+            </p:contextMenu>
+            
+            
+            <p:dialog header="Détails" widgetVar="competitionDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="competitionDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty controllerCompetitionManagedBean.selectedCompetition}" columnClasses="label,value">
+                        <h:outputText value="id:" />
+                        <h:outputText value="#{controllerCompetitionManagedBean.selectedCompetition.id}" />
+                        
+                        <h:outputText value="nom:" />
+                        <h:outputText value="#{controllerCompetitionManagedBean.selectedCompetition.nom}" />
+                        
+                        <h:outputText value="saison" />
+                        <h:outputText value="#{controllerCompetitionManagedBean.selectedCompetition.saison.nom}" />
+                        
+                        <h:outputText value="sport" />
+                        <h:outputText value="#{controllerCompetitionManagedBean.selectedCompetition.sport.nom}" />
+                        
+                        <h:outputText value="début" />
+                        <h:outputText value="#{controllerCompetitionManagedBean.selectedCompetition.dateCompetition}" />
+                        
+                        <h:outputText value="groupes:" />
+                        
+                        <ui:repeat value="#{controllerCompetitionManagedBean.selectedCompetition.groupeCollection}" var="groupe">
+                            <h:outputText value="groupes:" />
+                            <h:outputText value="#{groupe.nom}" />
+                        </ui:repeat>
+
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+            
+        </h:form>
+      </f:view>
+    </ui:define>
+
+
+</ui:composition>

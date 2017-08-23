@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="../../header.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <title><ui:define name="title">Liste des entrainement</ui:define></title>
+
+    <ui:define name="body">
+
+        <h:form>
+            <p:dataTable  value="#{controllerEntrainementManagedBean.all}" var="entrainement" 
+                         emptyMessage="Aucun entrainement trouvé" filteredValue="#{controllerEntrainementManagedBean.filtres}"
+                         stickyHeader="true" selection="#{controllerEntrainementManagedBean.selectedEntrainement}" selectionMode="single"
+                         rowKey="#{entrainement.id}" id="entrainements">
+                <f:facet name="header">
+                    Tous les entrainements
+                </f:facet>
+                <p:column headerText="date" filterBy="#{entrainement.dateEntrainement}" filterMatchMode="contains" >
+                    <h:outputText value="#{entrainement.dateEntrainement}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="groupe" filterBy="#{entrainement.groupe}" filterMatchMode="contains">
+                    <f:facet name="header">
+                        <h:outputText value="groupe"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{entrainement.groupe.nom}"></h:outputText>
+                </p:column>
+                <p:column headerText="saison" filterBy="#{entrainement.saison}" filterMatchMode="contains" >
+                    <h:outputText value="#{entrainement.saison.nom}"></h:outputText>
+                </p:column>
+
+            </p:dataTable>
+
+            <p:contextMenu for="entrainements">
+                <p:menuitem value="Voir les détails" update="entrainementDetail" icon="ui-icon-info" oncomplete="PF('entraienementDialog').show()"/>
+            </p:contextMenu>
+
+            <p:dialog header="Détails" widgetVar="entraienementDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="entrainementDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty controllerEntrainementManagedBean.selectedEntrainement}" columnClasses="label,value">
+                        <h:outputText value="Id:" />
+                        <h:outputText value="#{controllerEntrainementManagedBean.selectedEntrainement.groupe.nom}" />
+
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+        </h:form>
+
+    </ui:define>
+
+
+</ui:composition>

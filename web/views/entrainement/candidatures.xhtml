@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="../../header.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <title><ui:define name="title">Toutes les activités</ui:define></title>
+
+    <ui:define name="body">
+        <p:growl id="growl" showDetail="true" sticky="false" />
+        <p:dataTable value="#{controllerEntrainementManagedBean.affectationsNonConfirmees}" var="entrainement">
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Toutes les candidatures en attente de validation"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{entrainement.dateEntrainement} #{entrainement.groupe.nom}"></h:outputText>
+                <p:column>
+                    <h:dataTable value="#{entrainement.utilisateurCollection}" var="candidat" border="0" >
+                        <h:column>
+                            <h:outputText value="#{candidat.nom}"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{candidat.prenom}"/>
+                        </h:column>
+                        <p:column>
+                            <h:form>
+                                <p:commandButton type="button" value="Valider"
+                                                 icon="fa  fa-check-circle" style="background-color:green;"
+                                                 update="@form" ajax="false">
+                                    <f:ajax event="click" listener="#{controllerEntrainementManagedBean.valider(entrainement,candidat)}"/>
+                                </p:commandButton>
+                            </h:form>
+                            
+                        </p:column>
+                    </h:dataTable>
+                </p:column>
+
+            </p:column>
+        </p:dataTable>
+
+    </ui:define>
+
+
+</ui:composition>

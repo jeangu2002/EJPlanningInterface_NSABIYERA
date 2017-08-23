@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="../../header.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <title><ui:define name="title">Tous les groupes</ui:define></title>
+
+    <ui:define name="body">
+
+        <p:outputLabel value="Liste des saisons"></p:outputLabel>
+        <p:dataTable value="#{controllerSaisonManagedBean.all}" var="saison" stickyHeader="true">
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="saion"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{saison.nom}"></h:outputText>
+            </p:column>
+            <p:column headerText="début">
+                <h:outputText value="#{saison.dateDebut}">
+                    <f:convertDateTime type="date" pattern="dd-MM-yyyy HH:mm"/>
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="fin">
+                <h:outputText value="#{saison.dateFin}">
+                    <f:convertDateTime type="date" pattern="dd-MM-yyyy HH:mm"/>
+                </h:outputText>
+            </p:column>
+
+        </p:dataTable>
+
+    </ui:define>
+
+
+</ui:composition>

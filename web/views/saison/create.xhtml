@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="../../header.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <title><ui:define name="title">Compétitions</ui:define></title>
+
+    <ui:define name="body">
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="true" />
+            <p:fieldset legend="Nouvelle saison" widgetVar="regWidget" style="min-width: 570px;">
+                <h:panelGrid columns="1" width="550" border="0">
+                    <h:outputLabel value="Inscription"></h:outputLabel>
+
+                    <h:outputLabel for="nom" value="nom" />
+                    <p:inputText id="nom" value="#{controllerSaisonManagedBean.saisonBean.nom}" disabled="true" >
+                    </p:inputText>
+
+                    <p:outputLabel for="dateDebut" value="date début" />
+                    <p:calendar id="dateDebut" value="#{controllerSaisonManagedBean.saisonBean.dateDebut}" pattern="yyyy/dd/MM" mask="true" />
+                    
+                    <p:outputLabel for="dateFin" value="date fin" />
+                    <p:calendar id="dateFin" value="#{controllerSaisonManagedBean.saisonBean.dateFin}" pattern="yyyy/dd/MM" mask="true" />
+                    
+                    <p:commandButton action="#{controllerSaisonManagedBean.addSaison(controllerSaisonManagedBean.saisonBean)}"
+                                     value="Enregistrer" 
+                                     ajax="false" 
+                                     update="growl"/>
+                </h:panelGrid>
+            </p:fieldset>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="../../header.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <title><ui:define name="title">Toutes les activités</ui:define></title>
+
+    <ui:define name="body">
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="true" life="3000"/> 
+            <p:fieldset legend="Ajouter un groupe" widgetVar="regWidget" style="width: 600px;">
+
+                <h:panelGrid columns="1" width="550" border="0">
+                    <h:outputLabel value="Nom du groupe" />
+                    <p:inputText value="#{controllerGroupeManagedBean.groupeBean.nom}"
+                                 required="true"
+                                 requiredMessage="Entrez le nom du groupe">
+
+                    </p:inputText>
+                    <p:commandButton value="Ajouter"
+                                     action="#{controllerGroupeManagedBean.add(controllerGroupeManagedBean.groupeBean)}"
+                                     ajax="false"
+                                     update="growl">
+
+                    </p:commandButton>
+                </h:panelGrid>  
+
+            </p:fieldset>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

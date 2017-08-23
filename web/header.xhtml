@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+    </h:head>
+
+    <h:body style="margin-left:15%;margin-right:15%;padding-top:40px;">
+        <h:form> 
+            <p:growl id="messages" life="60"/>
+            <p:menubar>
+                <p:submenu label="Calendrier" icon="fa fa-calendar" >
+                    <p:menuitem value="voir le planning" action="#{scheduleView.redirectToCalendar()}"></p:menuitem>
+                </p:submenu>
+                <p:submenu label="Groupes" icon="fa fa-users">
+                    <p:menuitem value="Liste" action="#{controllerGroupeManagedBean.redirectToListPage()}" icon="fa fa-list" ajax="false" />
+                    <p:menuitem value="Ajouter" action="#{controllerGroupeManagedBean.redirectToCreatePage()}" icon="fa fa-user-plus" ajax="false"/>
+                </p:submenu>
+
+                <p:submenu label="Moniteurs" icon="fa fa-user">
+                    <p:menuitem value="Liste" action="#{controllerUtilisateurManagedBean.redirectToListPage()}" icon="fa fa-list" ajax="false" />
+                    <p:menuitem value="Ajouter" action="#{controllerUtilisateurManagedBean.redirectToCreatePage()}" icon="fa fa-user-plus" ajax="false" />
+                </p:submenu>
+
+                <p:submenu label="Compétitions" icon="fa fa-trophy">
+                    <p:menuitem value="Liste" action="#{controllerCompetitionManagedBean.redirectToListPage()}" icon="fa fa-list" ajax="false"/>
+                    <p:menuitem value="Ajouter" action="#{controllerCompetitionManagedBean.redirectToCreatePage()}" icon="fa fa-plus-circle" ajax="false"/>
+                    <p:menuitem value="Candidatures" action="#{controllerCompetitionManagedBean.redirectToCandidatures()}" icon="fa fa-user-plus" ajax="false" />
+                </p:submenu>
+
+                <p:submenu label="Entrainements" icon="fa fa-heartbeat">
+                    <p:menuitem value="Liste" action="#{controllerEntrainementManagedBean.redirectToListPage()}" icon="fa fa-list" update="messages" ajax="false"/>
+                    <p:menuitem value="Ajouter" action="#{controllerEntrainementManagedBean.redirectToCreatePage()}" icon="fa fa-plus-circle" update="messages" ajax="false"/>
+                    <p:menuitem value="Candidatures" action="#{controllerUtilisateurManagedBean.redirectToCandidaturesPage()}" icon="fa fa-user-plus" ajax="false" />
+                </p:submenu>
+
+                <p:submenu label="Activités" icon="fa fa-dribbble">
+                    <p:menuitem value="Liste" action="#{controllerSportManagedBean.redirectToListPage()}" icon="fa fa-list" ajax="false" process="@this"/>
+                    <p:menuitem value="Ajouter" action="#{controllerSportManagedBean.redirectToCreatePage()}" icon="fa fa-plus-circle" ajax="false" process="@this"/>
+                </p:submenu>
+                <p:submenu label="Saisons" icon="fa fa-calendar-times-o">
+                    <p:menuitem value="Liste" action="#{controllerSaisonManagedBean.redirectToListPage()}" icon="fa fa-list" ajax="false" process="@this"/>
+                    <p:menuitem value="Ajouter" action="#{controllerSaisonManagedBean.redirectToCreatePage()}" icon="fa fa-plus-circle" ajax="false" process="@this"/>
+                </p:submenu>
+                
+            </p:menubar>
+        </h:form>
+        <p>
+            <ui:insert name="body">Default Body</ui:insert>
+        </p>
+    </h:body>
+
+</html>

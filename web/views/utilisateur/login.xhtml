@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="../../header.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <title><ui:define name="title">Inscription</ui:define></title>
+
+    <ui:define name="body">
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="true" />
+            <p:fieldset legend="Connexion" widgetVar="regWidget" style="min-width: 570px;">
+                <h:panelGrid columns="1" width="550" border="0">
+             
+                    <h:outputLabel for="pseudo" value="pseudo" />
+                    <p:inputText id="pseudi" value="#{controllerUtilisateurManagedBean.utilisateurBean.pseudo}" >
+                    </p:inputText>
+
+                    <h:outputLabel for="motDePasse" value="mot de passe" />
+                    <p:password id="motDePasse" value="#{controllerUtilisateurManagedBean.utilisateurBean.motDePasse}" >
+                    </p:password>
+
+                    <p:commandButton action="#{controllerUtilisateurManagedBean.login(controllerUtilisateurManagedBean.utilisateurBean.pseudo,controllerUtilisateurManagedBean.utilisateurBean.motDePasse )}"
+                                     value="Connexion" 
+                                     ajax="false" 
+                                     update="growl"/>
+                </h:panelGrid>
+            </p:fieldset>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
